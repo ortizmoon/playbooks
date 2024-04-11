@@ -1,14 +1,13 @@
 ---
-- name: RouterOS test with network_cli connection
+- name: RouterOS upgrade
   hosts: routers
   gather_facts: false
   tasks:
-    - name: Run a command
+    - name: start commands
       community.routeros.command:
         commands:
-# Обновление микротов
+
           - /system package update set channel=stable
           - /system package update check-for-updates
           - /system package update install
 #          - :execute {/system reboot}
-       

@@ -1,10 +1,9 @@
 ---
-- name: RouterOS test with network_cli connection
+- name: RouterOS change pass
   hosts: routers
   gather_facts: false
   tasks:
-    - name: Run a command
+    - name: start commands
       community.routeros.command:
         commands:
-# Задать новый пароль
           - /user set root password=pass
