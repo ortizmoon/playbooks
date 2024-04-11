@@ -1,9 +1,9 @@
 ---
 - name: Upload file to Windows server
-  hosts: win_hosts
+  hosts: group_hosts
   tasks:
     - name: Copy file to remote Windows server
       win_copy:
-        src: /ansible/servers/your_file
+        src: /path/your_file
         dest: C:\ #Remote win path
 

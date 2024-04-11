@@ -1,9 +1,9 @@
 - name: Install zabbix agent on win hosts
-  hosts: win_hosts
+  hosts: group_hosts
   tasks:
     - name: Copy ZIP archive from SMB share to Windows host
       ansible.windows.win_shell: |
-        $sourcePath = '\\172.16.0.68\obmen\IT\scripts\zabbix\install_agent.zip'
+        $sourcePath = '\\my_path\install_agent.zip'
         $destinationPath = 'C:\install_agent.zip'
         Copy-Item -Path $sourcePath -Destination $destinationPath
 

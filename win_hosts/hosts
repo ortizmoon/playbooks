@@ -1,0 +1,14 @@
+[group_hosts:children]
+id_host
+
+[id_host]
+id_server ansible_host=172.16.0.35
+
+[group_hosts:vars]
+ansible_connection=ssh
+ansible_shell_type=powershell
+ansible_user=my_user
+ansible_password=my_pass
+ansible_become_method=runas
+ansible_become_user=SYSTEM
+
