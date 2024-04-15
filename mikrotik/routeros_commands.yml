@@ -6,8 +6,12 @@
     - name: start commands
       community.routeros.command:
         commands:
-
           - /system package update set channel=stable
           - /system package update check-for-updates
           - /system package update install
+
+###### reboot
 #          - :execute {/system reboot}
+
+###### change pass for user root
+#          - /user set root password=pass
