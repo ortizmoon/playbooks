@@ -1,9 +1,0 @@
----
-- name: Upload file to Windows server
-  hosts: group_hosts
-  tasks:
-    - name: Copy file to remote Windows server
-      win_copy:
-        src: /path/your_file
-        dest: C:\ #Remote win path
-
