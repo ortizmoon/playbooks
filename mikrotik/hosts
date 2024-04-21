@@ -1,0 +1,19 @@
+[routers:children]
+router_1
+router_2
+router_3
+
+[router_1]
+1 ansible_host=172.16.0.6
+
+[router_2]
+2 ansible_host=172.16.0.7
+
+[router_3]
+3 ansible_host=172.16.0.11
+
+[routers:vars]
+ansible_connection=ansible.netcommon.network_cli
+ansible_user=root
+ansible_ssh_private_key_file=/root/.ssh/id_rsa
+ansible_network_os=routeros
