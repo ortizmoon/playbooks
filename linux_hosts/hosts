@@ -1,0 +1,65 @@
+[linux_hosts:children]
+proxmox
+wireguard
+omv
+vpn
+100
+101
+102
+104
+107
+108
+109
+110
+111
+113
+115
+
+
+[proxmox]
+hyper ansible_host=172.16.0.22
+
+[wireguard]
+vpn ansible_host=95.140.158.7
+
+[omv]
+elliot ansible_host=172.16.0.68
+
+[100]
+nginx_proxy ansible_host=172.16.0.20
+
+[101]
+mail ansible_host=172.16.0.28
+
+[102]
+test ansible_host=172.16.0.37
+
+[104]
+nextcloud ansible_host=172.16.0.31
+
+[107]
+zabbix ansible_host=172.16.0.25
+
+[108]
+drweb ansible_host=172.16.0.32
+
+[109]
+vaultwarden ansible_host=172.16.0.23
+
+[110]
+helpdesk ansible_host=172.16.0.30
+
+[111]
+bitrix ansible_host=172.16.0.38
+
+[113]
+ansible ansible_host=172.16.0.34
+
+[115]
+mailgate ansible_host=172.16.0.29
+
+
+[linux_hosts:vars]
+ansible_user=root
+ansible_ssh_private_key_file=/root/.ssh/id_rsa
+
