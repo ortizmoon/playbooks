@@ -1,2 +1,2 @@
-./.venv
-./proxmox_hosts/myenv
+.venv
+proxmox_hosts/myenv
