@@ -1,0 +1,32 @@
+---
+- name: Clone VM using Proxmox script
+  hosts: proxmox_host
+  become: yes
+  vars:
+      ansible_python_interpreter: /usr/bin/python3.9
+  vars_prompt:
+    - name: "vm_id"
+      prompt: "Insert new VM ID"
+      private: no
+    - name: "vm_name"
+      prompt: "Insert new VM name"
+      private: no
+  tasks:
+    - name: Copy script
+      copy:
+        src: "{{ playbook_dir }}/vm_from_template.sh"
+        dest: /tmp/deploy_new_proxmox_vm.sh
+        mode: '0755'
+
+    - name: Start script
+      shell: "/tmp/vm_from_template {{ vm_id }} {{ vm_name }}"
+      register: script_output
+      ignore_errors: yes
+
+    - name: Stdout
+      debug:
+        var: script_output.stdout_lines
+
+    - name: Stderr
+      debug:
+        var: script_output.stderr_lines

@@ -1,0 +1,15 @@
+[linux_hosts]
+    linux_server_1 ansible_host=10.10.0.11
+    linux_server_2 ansible_host=10.10.0.12
+    linux_server_3 ansible_host=10.10.0.13
+    linux_server_4 ansible_host=10.10.0.14
+    linux_server_5 ansible_host=10.10.0.15
+    linux_server_6 ansible_host=10.10.0.16
+    linux_server_7 ansible_host=10.10.0.17
+    linux_server_8 ansible_host=10.10.0.18
+    linux_server_9 ansible_host=10.10.0.19
+    linux_server_10 ansible_host=10.10.0.20
+
+[linux_hosts:vars]
+    ansible_user=<user>
+    ansible_ssh_private_key_file=/path/to/.ssh/id_rsa

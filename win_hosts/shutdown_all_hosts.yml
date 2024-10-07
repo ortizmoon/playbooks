@@ -1,0 +1,11 @@
+---
+- name: Shutdown windows server
+  hosts: win_hosts
+  tasks:
+    - name: Shutdown
+      win_shell: shutdown /s /t 0
+      register: command_output  # for stdout print
+
+    - name: Print command output
+      debug:
+        var: command_output.stdout  # stdout
