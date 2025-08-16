@@ -1,9 +1,0 @@
-### HYPERVISORS ###
-[proxmox]
-    node_1 ansible_host=172.10.0.10
-    node_2 ansible_host=172.10.0.11
-    node_3 ansible_host=172.10.0.12
-
-[proxmox:vars]
-    ansible_user=<user>
-    ansible_ssh_private_key_file=/path/to/.ssh/id_rsa

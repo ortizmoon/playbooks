@@ -1,0 +1,5 @@
+---
+- name: Reboot Mikrotik
+  community.routeros.command:
+    commands:
+      - /system reboot

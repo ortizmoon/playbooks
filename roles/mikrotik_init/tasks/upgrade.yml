@@ -1,0 +1,7 @@
+---
+- name: Update ROS
+  community.routeros.command:
+    commands:
+      - /system package update set channel=stable
+      - /system package update check-for-updates
+      - /system package update install

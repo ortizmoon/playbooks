@@ -1,0 +1,6 @@
+---
+- name: Change Mikrotik admin password
+  community.routeros.command:
+    commands:
+      - /user set {{ mikrotik_user }} password={{ mikrotik_password }}
+  no_log: true

@@ -1,9 +1,0 @@
----
-- name: RouterOS change pass
-  hosts: routers
-  gather_facts: false
-  tasks:
-    - name: start commands
-      community.routeros.command:
-        commands:
-          - /user set <username> password=<password>

@@ -1,0 +1,12 @@
+---
+- name: Change Mikrotik password
+  ansible.builtin.include_tasks: change_pass.yml
+  when: mikrotik_change_password | bool
+
+- name: Upgrade Mikrotik
+  ansible.builtin.include_tasks: upgrade.yml
+  when: mikrotik_update | bool
+
+- name: Reboot Mikrotik
+  ansible.builtin.include_tasks: reboot.yml
+  when: mikrotik_reboot | bool

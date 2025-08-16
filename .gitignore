@@ -1,2 +1,13 @@
 .venv
-proxmox_hosts/myenv
+ansible/ansible-vault.pass
+ansible/.ansible/
+ansible/.venv/
+ansible/.DS_Store
+ansible/.envrc
+ansible/.python-version
+ansible/.idea/
+ansible/.vscode/
+ansible/**/*.pyc
+ansible/**/__pycache__/
+.ansible/
+.DS_Store
