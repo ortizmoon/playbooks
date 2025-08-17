@@ -1,0 +1,20 @@
+---
+- name: Pack x-ui from old VPS
+  hosts: vpn-old
+  gather_facts: false
+  roles:
+    - role: vpn_migrate
+      vars:
+        vpn_migrate_pack_old: true
+        vpn_migrate_restore_new: false
+        vpn_migrate_rev_nginx: false
+
+- name: Restore x-ui to new VPS
+  hosts: vpn-new
+  gather_facts: false
+  roles:
+    - role: vpn_migrate
+      vars:
+        vpn_migrate_pack_old: false
+        vpn_migrate_restore_new: true
+        vpn_migrate_rev_nginx: true

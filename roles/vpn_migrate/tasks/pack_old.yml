@@ -1,0 +1,30 @@
+---
+- name: Debug var inside role
+  ansible.builtin.debug:
+    var: x_ui_service
+
+- name: Stop x-ui
+  ansible.builtin.service:
+    name: "{{ x_ui_service }}"
+    state: stopped
+  failed_when: false
+
+- name: Ensure workdir
+  ansible.builtin.file:
+    path: "{{ x_ui_workdir }}"
+    state: directory
+    mode: "0755"
+
+- name: Create archive
+  ansible.builtin.shell: |
+    set -eo pipefail
+    tar -czf {{ x_ui_workdir }}/{{ x_ui_archive_name }} {{ x_ui_db_path }} {{ x_ui_xray_config }}
+  args:
+    executable: /bin/bash
+    creates: "{{ x_ui_workdir }}/{{ x_ui_archive_name }}"
+
+- name: Fetch archive to controller
+  ansible.builtin.fetch:
+    src: "{{ x_ui_workdir }}/{{ x_ui_archive_name }}"
+    dest: "{{ x_ui_workdir }}/"
+    flat: true

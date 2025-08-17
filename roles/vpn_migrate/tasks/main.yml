@@ -1,0 +1,12 @@
+---
+- name: Archive x-ui from old server
+  ansible.builtin.include_tasks: pack_old.yml
+  when: vpn_migrate_pack_old | bool
+
+- name: Restore x-ui on new server
+  ansible.builtin.include_tasks: restore_new.yml
+  when: vpn_migrate_restore_new | bool
+
+- name: Setup nginx reverse proxy with TLS
+  ansible.builtin.include_tasks: rev_nginx.yml
+  when: vpn_migrate_rev_nginx | bool

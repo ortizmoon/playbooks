@@ -1,0 +1,14 @@
+x_ui_service: x-ui
+x_ui_db_path: /etc/x-ui/x-ui.db
+x_ui_xray_config: /usr/local/x-ui/bin/config.json
+x_ui_workdir: /tmp/x-ui-migrate
+x_ui_archive_name: x-ui-backup.tar.gz
+
+x_ui_install_cmd: >-
+  bash <(curl -Ls https://raw.githubusercontent.com/mhsanaei/3x-ui/master/install.sh)
+
+cf_zone: "ebatra.com"
+cf_record_name: "xui.ebatra.com"
+cf_target_ip: "{{ hostvars['vpn-new'].ansible_host }}"
+cf_email: "popovartemb@gmail.com"
+rev_proxy_pass: "http://127.0.0.1:8040"

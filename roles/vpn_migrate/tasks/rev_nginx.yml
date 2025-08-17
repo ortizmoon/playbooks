@@ -1,0 +1,57 @@
+---
+- name: Ensure nginx and certbot installed
+  ansible.builtin.apt:
+    name:
+      - nginx
+      - certbot
+      - python3-certbot-nginx
+    state: present
+    update_cache: true
+
+- name: Deploy temporary nginx config
+  ansible.builtin.template:
+    src: nginx_http_only.conf.j2
+    dest: "/etc/nginx/sites-available/{{ cf_record_name }}"
+    mode: "0644"
+
+- name: Symlink nginx config
+  ansible.builtin.file:
+    src: "/etc/nginx/sites-available/{{ cf_record_name }}"
+    dest: "/etc/nginx/sites-enabled/{{ cf_record_name }}"
+    state: link
+    force: true
+
+- name: Restart nginx (HTTP only)
+  ansible.builtin.service:
+    name: nginx
+    state: restarted
+
+- name: Request Let's Encrypt cert via certbot (nginx plugin)
+  ansible.builtin.command:
+    cmd: >
+      certbot --nginx
+      -d {{ cf_record_name }}
+      --agree-tos
+      --email {{ cf_email }}
+      --non-interactive
+      --redirect
+  args:
+    creates: "/etc/letsencrypt/live/{{ cf_record_name }}/fullchain.pem"
+
+- name: Deploy final nginx config
+  ansible.builtin.template:
+    src: nginx_https_proxy.conf.j2
+    dest: "/etc/nginx/sites-available/{{ cf_record_name }}"
+    mode: "0644"
+
+- name: Reload nginx (final config)
+  ansible.builtin.service:
+    name: nginx
+    state: reloaded
+
+- name: Renew in crontab
+  ansible.builtin.cron:
+    name: "Renew Let's Encrypt certs"
+    job: "certbot renew --quiet && systemctl reload nginx"
+    minute: "0"
+    hour: "3"

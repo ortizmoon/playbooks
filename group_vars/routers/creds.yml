@@ -1,5 +1,0 @@
-mikrotik_user: admin
-mikrotik_password: pass
-
-ansible_user: "{{ mikrotik_user }}"
-ansible_password: "{{ mikrotik_password }}"

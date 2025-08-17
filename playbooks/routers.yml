@@ -1,14 +1,12 @@
 ---
 - name: Mikrotik service
-  hosts: routers
+  hosts: mikrotik_init
   gather_facts: false
   serial: 1
-  collections:
-    - community.routeros
 
   roles:
     - role: mikrotik_init
       vars:
-        mikrotik_change_password: true
-        mikrotik_update: true
-        mikrotik_reboot: true
+        mikrotik_init_change_password: true
+        mikrotik_init_update: true
+        mikrotik_init_reboot: true

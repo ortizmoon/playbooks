@@ -1,0 +1,55 @@
+---
+- name: Ensure curl present
+  ansible.builtin.package:
+    name: curl
+    state: present
+
+- name: Install x-ui via script
+  ansible.builtin.shell: |
+    {{ x_ui_install_cmd }}
+  args:
+    executable: /bin/bash
+    creates: /usr/local/x-ui
+
+- name: Stop x-ui
+  ansible.builtin.service:
+    name: "{{ x_ui_service }}"
+    state: stopped
+  failed_when: false
+
+- name: Ensure workdir on new
+  ansible.builtin.file:
+    path: "{{ x_ui_workdir }}"
+    state: directory
+    mode: "0755"
+
+- name: Copy archive
+  ansible.builtin.copy:
+    src: "{{ x_ui_workdir }}/{{ x_ui_archive_name }}"
+    dest: "{{ x_ui_workdir }}/{{ x_ui_archive_name }}"
+    mode: "0644"
+
+- name: Restore files to exact paths
+  ansible.builtin.unarchive:
+    src: "{{ x_ui_workdir }}/{{ x_ui_archive_name }}"
+    dest: "/"
+    remote_src: true
+    owner: root
+    group: root
+
+- name: Add new a-record in CF
+  community.general.cloudflare_dns:
+    zone: "{{ cf_zone }}"
+    record: "{{ cf_record_name }}"
+    type: A
+    value: "{{ cf_target_ip }}"
+    ttl: "1"
+    proxied: "false"
+    api_token: "{{ cf_api_token }}"
+    solo: true
+
+- name: Start & enable x-ui
+  ansible.builtin.service:
+    name: "{{ x_ui_service }}"
+    state: started
+    enabled: true

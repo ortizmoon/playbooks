@@ -1,32 +1,14 @@
 all:
-  vars:
-    ansible_ssh_private_key_file: ~/.ssh/id_ed25519
-
   children:
-    routers:
-      vars:
-        ansible_connection: network_cli
-        ansible_network_os: community.routeros.routeros
-        ansible_user: "{{ ansible_user }}"
-        ansible_password: "{{ mikrotik_password }}"
+    mikrotik:
       hosts:
-        "192.168.100.1":
-        "192.168.100.2":
-        "192.168.100.3":
-        "192.168.100.4":
-        "192.168.100.5":
-        "192.168.100.6":
-        "192.168.100.7":
-        "192.168.100.8":
-        "192.168.100.9":
-        "192.168.100.10":
+        192.168.100.1:
+        192.168.100.2:
+        192.168.100.3:
 
-    old_vps:
+    vpn:
       hosts:
-        old_server:
-          ansible_host: 192.168.20.10
-
-    new_vps:
-      hosts:
-        new_server:
-          ansible_host: 192.168.10.2
+        vpn-old:
+          ansible_host: 95.164.7.54
+        vpn-new:
+          ansible_host: 95.140.158.158
