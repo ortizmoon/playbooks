@@ -9,6 +9,6 @@ all:
     vpn:
       hosts:
         vpn-old:
-          ansible_host: 95.164.7.54
+          ansible_host: 10.10.10.10 # Old VPS IP
         vpn-new:
-          ansible_host: 95.140.158.158
+          ansible_host: 10.10.10.20 # New VPS IP

@@ -7,8 +7,8 @@ x_ui_archive_name: x-ui-backup.tar.gz
 x_ui_install_cmd: >-
   bash <(curl -Ls https://raw.githubusercontent.com/mhsanaei/3x-ui/master/install.sh)
 
-cf_zone: "ebatra.com"
-cf_record_name: "xui.ebatra.com"
+cf_zone: "yoursite.com"
+cf_record_name: "yoursite.com"
 cf_target_ip: "{{ hostvars['vpn-new'].ansible_host }}"
-cf_email: "popovartemb@gmail.com"
+cf_email: "your@email.com"
 rev_proxy_pass: "http://127.0.0.1:8040"
